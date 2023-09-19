@@ -7,11 +7,25 @@ import { createRestaurantSchemaValidation } from "~/lib/validations/restaurants"
 export const useCreateRestaurantAction = routeAction$(
   async (data, { cookie, redirect }) => {
     const jwtCookie = cookie.get("jwt");
-
+    console.log("DATA", data);
     const payload = {
       ...data,
       logo: "",
       modulesAvailables: [data.modulesAvailables],
+      contactInformation: {
+        email: "",
+        phoneNumbers: "",
+        website: "",
+        facebook: "",
+        instagram: "",
+      },
+      taxesInformation: {
+        invoiceNumber: "",
+        vatNumber: "",
+        taxRate: 0,
+        taxType: "",
+        taxExempt: false,
+      },
     };
     //TODO: Controller object File for save logo and controller moduleAvailables
     const { success } = await createRestaurant(jwtCookie?.value, payload);
@@ -103,7 +117,28 @@ export default component$(() => {
                 )}
               </div>
             </div>
-
+            <div class="col-span-full">
+              <label
+                for="branches"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Sucursales
+              </label>
+              <div class="mt-2">
+                <input
+                  type="number"
+                  name="branches"
+                  id="branches"
+                  autoComplete="branches"
+                  class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                {action.value?.fieldErrors?.branches && (
+                  <div class="text-red-800">
+                    {action.value.fieldErrors.branches[0]}
+                  </div>
+                )}
+              </div>
+            </div>
             <div class="col-span-full">
               <label
                 for="cover-photo"
@@ -137,6 +172,172 @@ export default component$(() => {
                     {action.value.fieldErrors.logo[0]}
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">
+            Informacion de contacto
+          </h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">
+            Información de contacto del restaurante.
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <label
+                for="contactInformation.email"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Correo eléctronico
+              </label>
+              <div class="mt-2">
+                <input
+                  id="contactInformation.email"
+                  name="contactInformation.email"
+                  type="email"
+                  class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="contactInformation.phoneNumbers"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Número de telefono
+              </label>
+              <div class="mt-2">
+                <input
+                  id="contactInformation.phoneNumbers"
+                  name="contactInformation.phoneNumbers"
+                  type="text"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="contactInformation.facebook"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Facebook
+              </label>
+              <div class="mt-2">
+                <input
+                  id="contactInformation.facebook"
+                  name="contactInformation.facebook"
+                  type="url"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="contactInformation.instagram"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Instagram
+              </label>
+              <div class="mt-2">
+                <input
+                  id="contactInformation.instagram"
+                  name="contactInformation.instagram"
+                  type="url"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">
+            Informacion de impuestos
+          </h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">
+            Datos de requerimientos fiscales del restaurante.
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <label
+                for="taxesInformation.invoiceNumber"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Número de factura
+              </label>
+              <div class="mt-2">
+                <input
+                  id="taxesInformation.invoiceNumber"
+                  name="taxesInformation.invoiceNumber"
+                  type="text"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="taxesInformation.vatNumber"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Número de identificación fiscal (RTN)
+              </label>
+              <div class="mt-2">
+                <input
+                  id="taxesInformation.vatNumber"
+                  name="taxesInformation.vatNumber"
+                  type="text"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="taxesInformation.taxRate"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Impuesto aplicable
+              </label>
+              <div class="mt-2">
+                <input
+                  id="taxesInformation.taxRate"
+                  name="taxesInformation.taxRate"
+                  type="text"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="taxesInformation.taxType"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Tipo de impuesto aplicable
+              </label>
+              <div class="mt-2">
+                <input
+                  id="taxesInformation.taxType"
+                  name="taxesInformation.taxType"
+                  type="text"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="taxesInformation.taxExempt"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Excepto de impuestos
+              </label>
+              <div class="mt-2">
+                <input
+                  type="checkbox"
+                  name="taxesInformation.taxExempt"
+                  id="taxesInformation.taxExempt"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
               </div>
             </div>
           </div>

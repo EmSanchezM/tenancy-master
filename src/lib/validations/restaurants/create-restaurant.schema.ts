@@ -10,4 +10,19 @@ export const createRestaurantSchemaValidation = {
     lastModified: z.number()
   }),
   modulesAvailables: z.string(),
+  branches: z.number().positive(),
+  contactInformation: z.object({
+    email: z.string(),
+    phoneNumbers: z.string(),
+    website: z.string().optional(),
+    facebook: z.string().optional(),
+    instagram: z.string().optional(),
+  }),
+  taxesInformation: z.object({
+    invoiceNumber: z.string(),
+    vatNumber: z.string(),
+    taxRate: z.number().positive(),
+    taxType: z.string(),
+    taxExempt: z.boolean()
+  })
 }
