@@ -2,7 +2,7 @@ import { type MODULES_AVAILABLES } from "~/lib/constants";
 
 export interface ContactInformation {
   email?: string;
-  phoneNumbers?: string[];
+  phoneNumbers?: string;
   website?: string;
   facebook?: string;
   instagram?: string;
@@ -20,10 +20,10 @@ export interface RestaurantRequestData {
   name: string;
   logo: string;
   language: string;
-  modulesAvailables: MODULES_AVAILABLES[];
+  modulesAvailables: string[];
   branches: number;
   contactInformation: ContactInformation;
-  taxesInformation: TaxesInformation;
+  taxInformation: TaxesInformation;
 }
 
 export interface Restaurant {
@@ -34,5 +34,5 @@ export interface Restaurant {
   modulesAvailables: MODULES_AVAILABLES[];
   branches: number;
   contactInformation: ContactInformation;
-  taxesInformation: TaxesInformation;
+  taxInformation: TaxesInformation;
 }

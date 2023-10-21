@@ -1,8 +1,10 @@
 import { component$ } from "@builder.io/qwik";
 import { type DocumentHead, routeLoader$ } from "@builder.io/qwik-city";
 
-import { Table } from "~/components/ui/table";
 import { getAllUsers } from "~/lib/services/users";
+
+import { UserCard } from "~/views/users/card-user";
+import { HeaderUser } from "~/views/users/header";
 
 export const useUsers = routeLoader$(async ({ cookie }) => {
   const jwtCookie = cookie.get("jwt");
@@ -15,15 +17,19 @@ export default component$(() => {
 
   if (users.value.length === 0) return <p>No hay restuarantes</p>;
 
-  const header = {
-    title: "Users",
-    action: { href: "/users/create", title: "New User" },
-  };
-
   return (
-    <>
-      <Table header={header} values={users.value} />
-    </>
+    <section class="w-full sm:px-6">
+      <HeaderUser />
+      <main class="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
+        <section class="grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {users.value.map((user) => {
+            return (
+              <UserCard key={user.id} user={user} />
+            );
+          })}
+        </section>
+      </main>
+    </section>
   );
 });
 

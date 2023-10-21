@@ -1,33 +1,21 @@
 import { component$ } from "@builder.io/qwik";
 import { routeAction$, zod$, Form } from "@builder.io/qwik-city";
-import { createRestaurant } from "~/lib/services/restaurants";
+import { createRestaurant, uploadLogoRestaurant } from "~/lib/services/restaurants";
 
 import { createRestaurantSchemaValidation } from "~/lib/validations/restaurants";
 
 export const useCreateRestaurantAction = routeAction$(
   async (data, { cookie, redirect }) => {
     const jwtCookie = cookie.get("jwt");
-    console.log("DATA", data);
+
+    const { data: logo } = await uploadLogoRestaurant(jwtCookie?.value, data.logo);
+
     const payload = {
       ...data,
-      logo: "",
+      logo,
       modulesAvailables: [data.modulesAvailables],
-      contactInformation: {
-        email: "",
-        phoneNumbers: "",
-        website: "",
-        facebook: "",
-        instagram: "",
-      },
-      taxesInformation: {
-        invoiceNumber: "",
-        vatNumber: "",
-        taxRate: 0,
-        taxType: "",
-        taxExempt: false,
-      },
     };
-    //TODO: Controller object File for save logo and controller moduleAvailables
+
     const { success } = await createRestaurant(jwtCookie?.value, payload);
 
     if (success) redirect(301, "/");
@@ -164,7 +152,7 @@ export default component$(() => {
                     <p class="pl-1">or drag and drop</p>
                   </div>
                   <p class="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
+                    PNG, JPG, WEBP, SVG up to 3MB
                   </p>
                 </div>
                 {action.value?.fieldErrors?.logo && (

@@ -9,12 +9,15 @@ export const api = axios.create({
   },
 });
 
-export const apiPrivate = (cookie: string | undefined) => axios.create({
-  baseURL: BASEURL,
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": `Bearer ${cookie}`
-  },
-});
-
+export const apiPrivate = (
+  cookie?: string,
+  contentType: string = "application/json"
+) =>
+  axios.create({
+    baseURL: BASEURL,
+    headers: {
+      "Content-Type": contentType,
+      Accept: "application/json",
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
