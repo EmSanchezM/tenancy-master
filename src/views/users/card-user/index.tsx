@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 
-import { ProfileUser } from "~/lib/models/auth";
+import { type ProfileUser } from "~/lib/models/auth";
 
 interface UserCardProps {
   user: ProfileUser;

@@ -63,50 +63,6 @@ export default component$(() => {
             </div>
             <div class="col-span-full">
               <label
-                for="language"
-                class="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Idioma
-              </label>
-              <div class="mt-2">
-                <input
-                  type="text"
-                  name="language"
-                  id="language"
-                  autoComplete="language"
-                  class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                {action.value?.fieldErrors?.language && (
-                  <div class="text-red-800">
-                    {action.value.fieldErrors.language[0]}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div class="col-span-full">
-              <label
-                for="modulesAvailables"
-                class="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Modulos disponibles
-              </label>
-              <div class="mt-2">
-                <input
-                  type="text"
-                  name="modulesAvailables"
-                  id="modulesAvailables"
-                  autoComplete="modulesAvailables"
-                  class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                {action.value?.fieldErrors?.modulesAvailables && (
-                  <div class="text-red-800">
-                    {action.value.fieldErrors.modulesAvailables[0]}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div class="col-span-full">
-              <label
                 for="branches"
                 class="block text-sm font-medium leading-6 text-gray-900"
               >
@@ -123,6 +79,47 @@ export default component$(() => {
                 {action.value?.fieldErrors?.branches && (
                   <div class="text-red-800">
                     {action.value.fieldErrors.branches[0]}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="language"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Idioma
+              </label>
+              <div class="mt-2">
+                <select id="language" name="language" autoComplete="language" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option value="es">Español</option>
+                  <option value="en">Ingles</option>
+                </select>
+                {action.value?.fieldErrors?.language && (
+                  <div class="text-red-800">
+                    {action.value.fieldErrors.language[0]}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div class="col-span-full">
+              <label
+                for="modulesAvailables"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Modulos disponibles
+              </label>
+              <div class="mt-2">
+                <select id="modulesAvailables" name="modulesAvailables" autoComplete="modulesAvailables" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option value="BASIC">Basico</option>
+                  <option value="INVENTORY">Inventario</option>
+                  <option value="ANALYTICS">Analiticas y reportes</option>
+                  <option value="EMPLOYEE_MANAGEMENT">Control de empleados</option>
+                  <option value="MARKETING">Marketing</option>
+                </select>
+                {action.value?.fieldErrors?.modulesAvailables && (
+                  <div class="text-red-800">
+                    {action.value.fieldErrors.modulesAvailables[0]}
                   </div>
                 )}
               </div>
@@ -320,12 +317,10 @@ export default component$(() => {
                 Excepto de impuestos
               </label>
               <div class="mt-2">
-                <input
-                  type="checkbox"
-                  name="taxesInformation.taxExempt"
-                  id="taxesInformation.taxExempt"
-                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+                <div class="flex items-center gap-x-3">
+                  <input id="taxesInformation.taxExempt" name="taxesInformation.taxExempt" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                  <label for="taxesInformation.taxExempt" class="block text-sm font-medium leading-6 text-gray-900">Excepto</label>
+                </div>
               </div>
             </div>
           </div>

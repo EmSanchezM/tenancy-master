@@ -3,8 +3,7 @@ import { type DocumentHead, routeLoader$ } from "@builder.io/qwik-city";
 
 import { getAllUsers } from "~/lib/services/users";
 
-import { UserCard } from "~/views/users/card-user";
-import { HeaderUser } from "~/views/users/header";
+import { UserCard, HeaderUser, NoDataUsers } from "~/views/users";
 
 export const useUsers = routeLoader$(async ({ cookie }) => {
   const jwtCookie = cookie.get("jwt");
@@ -15,7 +14,7 @@ export const useUsers = routeLoader$(async ({ cookie }) => {
 export default component$(() => {
   const users = useUsers();
 
-  if (users.value.length === 0) return <p>No hay restuarantes</p>;
+  if (users.value.length === 0) return <NoDataUsers />;
 
   return (
     <section class="w-full sm:px-6">
