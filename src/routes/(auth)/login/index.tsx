@@ -33,8 +33,8 @@ export default component$(() => {
   const action = useAuthLoginAction();
 
   return (
-    <Form class="form" action={action}>
-      <div class="field email">
+    <Form class="form" action={action} role="form" aria-label="Formulario de inicio de sesión">
+      <div class="field email" aria-labelledby="content-field">
         <div class="input-area">
           <input
             type="text"

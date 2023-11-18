@@ -7,8 +7,10 @@ export default component$(() => {
 
   return (
     <main class="wrapper">
-      <section class="container">
-        <header class="title">Welcome to Tenancy Master!</header>
+      <section class="container" aria-label="content-auth">
+        <header class="title" role="heading" aria-label="auth-title">
+          <h1>Bienvenido a Tenancy Master!</h1>
+        </header>
         <Slot />
       </section>
     </main>
