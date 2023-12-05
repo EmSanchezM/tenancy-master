@@ -18,7 +18,7 @@ export const createRestaurantSchemaValidation = {
     .refine((file: File) => file.size <= MAX_FILE_SIZE, "Tamaño máximo es 3MB")
     .refine((file: File) => checkFileType(file), "Formato no valido"),
   modulesAvailables: z.string(),
-  branches: z.string().transform((val) => +val),
+  branches: z.coerce.number().min(1),
   contactInformation: z.object({
     email: z.string(),
     phoneNumbers: z.string(),
@@ -31,7 +31,7 @@ export const createRestaurantSchemaValidation = {
       .string({ required_error: "Número de factura es requerido" })
       .min(6, "Mínimo 6 letras"),
     vatNumber: z.string(),
-    taxRate: z.string().transform((val) => +val),
+    taxRate: z.coerce.number().min(0),
     taxType: z.string(),
     taxExempt: z.boolean().optional().default(false),
   }),
