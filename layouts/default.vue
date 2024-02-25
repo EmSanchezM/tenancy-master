@@ -11,7 +11,7 @@ const menu = [
 <template>
   <main class="flex justify-center w-full min-h-screen bg-gray-200">
     <Sidebar />
-    <section class="flex min-h-screen flex-1 flex-col bg-gray-800">
+    <section class="flex min-h-screen flex-1 flex-col px-4 py-2 bg-gray-800">
       <nav class="flex items-center gap-x-6">NAVBAR</nav>
       <slot />
     </section>
