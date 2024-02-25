@@ -10,8 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.10.0",
-    "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "@antfu/eslint-config": "^2.6.4",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "eslint": "^8.57.0",
+    "nuxt": "^3.10.3",
+    "vue": "^3.4.19",
+    "vue-router": "^4.3.0",
+    "zod": "^3.22.4"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.14.1"
   }
 }
