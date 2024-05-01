@@ -17,7 +17,7 @@ type Schema = z.infer<typeof schema>;
 
 const form = ref();
 
-const onSubmit = (evt: any) => {
+const onSubmit = (evt: Schema) => {
   console.log(evt);
 };
 </script>

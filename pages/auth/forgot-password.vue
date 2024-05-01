@@ -12,9 +12,11 @@ const schema = z.object({
   email: z.string().min(3, "Es requerido"),
 });
 
+type Schema = z.infer<typeof schema>;
+
 const form = ref();
 
-const onSubmit = (evt: any) => {
+const onSubmit = (evt: Schema) => {
   console.log(evt);
 };
 </script>
